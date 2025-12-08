@@ -2,7 +2,11 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 
-const LandingPage: React.FC = () => {
+interface LandingPageProps {
+  onNavigate: (page: string) => void;
+}
+
+const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col">
       {/* Navbar */}
@@ -20,20 +24,20 @@ const LandingPage: React.FC = () => {
 
           {/* Right side */}
           <div className="flex items-center gap-4">
-            <a
-              href="/login"
+            <button
+              onClick={() => onNavigate("login")}
               className="text-sm font-medium text-slate-700 hover:text-slate-900"
             >
               Login
-            </a>
+            </button>
 
-            <a
-              href="/signup"
+            <button
+              onClick={() => onNavigate("signup")}
               className="hidden sm:inline-flex items-center gap-2 rounded-full bg-sky-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-700 transition"
             >
-              Get Started — It’s Free
+              Get Started — It's Free
               <ArrowRight className="h-4 w-4" />
-            </a>
+            </button>
           </div>
         </div>
       </header>
@@ -64,13 +68,14 @@ const LandingPage: React.FC = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 mb-5">
-                <a
-                  href="/signup"
+                <button
+                  onClick={() => onNavigate("signup")}
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-sky-600 px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-sky-700 transition"
                 >
                   Create Your Card — Free
                   <ArrowRight className="h-4 w-4" />
-                </a>
+                </button>
+
                 <a
                   href="#templates"
                   className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-800 hover:bg-slate-50 transition"
@@ -84,7 +89,7 @@ const LandingPage: React.FC = () => {
               </p>
             </div>
 
-            {/* Hero preview */}
+            {/* Hero Card Preview */}
             <div className="relative">
               <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-sky-100 blur-2xl" />
               <div className="absolute -right-6 -bottom-8 h-32 w-32 rounded-full bg-indigo-100 blur-2xl" />
@@ -218,10 +223,7 @@ const LandingPage: React.FC = () => {
         </section>
 
         {/* Templates section */}
-        <section
-          id="templates"
-          className="bg-white border-y border-slate-100"
-        >
+        <section id="templates" className="bg-white border-y border-slate-100">
           <div className="mx-auto max-w-6xl px-4 py-10 sm:py-14">
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-2xl font-semibold text-slate-900">
@@ -233,42 +235,45 @@ const LandingPage: React.FC = () => {
             </div>
 
             <div className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory">
-              {["Modern Blue", "Minimal White", "Luxury Dark", "Gradient Glow"].map(
-                (name, i) => (
-                  <div
-                    key={name}
-                    className="min-w-[260px] max-w-[260px] snap-start rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4 text-slate-50 shadow-lg"
-                    style={{
-                      backgroundImage:
-                        i === 0
-                          ? "linear-gradient(135deg,#2563EB,#4F46E5)"
-                          : i === 1
-                          ? "linear-gradient(135deg,#0F172A,#020617)"
-                          : i === 2
-                          ? "linear-gradient(135deg,#111827,#1F2937)"
-                          : "linear-gradient(135deg,#4F46E5,#EC4899)",
-                    }}
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="h-10 w-10 rounded-2xl bg-white/10 flex items-center justify-center text-sm font-semibold">
-                        NV
-                      </div>
-                      <div>
-                        <div className="text-sm font-semibold">John Doe</div>
-                        <div className="text-[11px] text-slate-200">
-                          Product Designer
-                        </div>
-                      </div>
+              {[
+                "Modern Blue",
+                "Minimal White",
+                "Luxury Dark",
+                "Gradient Glow",
+              ].map((name, i) => (
+                <div
+                  key={name}
+                  className="min-w-[260px] max-w-[260px] snap-start rounded-3xl p-4 text-slate-50 shadow-lg"
+                  style={{
+                    backgroundImage:
+                      i === 0
+                        ? "linear-gradient(135deg,#2563EB,#4F46E5)"
+                        : i === 1
+                        ? "linear-gradient(135deg,#0F172A,#020617)"
+                        : i === 2
+                        ? "linear-gradient(135deg,#111827,#1F2937)"
+                        : "linear-gradient(135deg,#4F46E5,#EC4899)",
+                  }}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="h-10 w-10 rounded-2xl bg-white/10 flex items-center justify-center text-sm font-semibold">
+                      NV
                     </div>
-                    <div className="text-[11px] text-slate-100 mb-3">
-                      {name} Template
-                    </div>
-                    <div className="text-[10px] text-slate-200/80">
-                      Phone • Email • Website • Social links
+                    <div>
+                      <div className="text-sm font-semibold">John Doe</div>
+                      <div className="text-[11px] text-slate-200">
+                        Product Designer
+                      </div>
                     </div>
                   </div>
-                )
-              )}
+                  <div className="text-[11px] text-slate-100 mb-3">
+                    {name} Template
+                  </div>
+                  <div className="text-[10px] text-slate-200/80">
+                    Phone • Email • Website • Social links
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -285,13 +290,15 @@ const LandingPage: React.FC = () => {
                 digital identity, track engagement, and never lose a contact
                 again.
               </p>
-              <a
-                href="/signup"
+
+              <button
+                onClick={() => onNavigate("signup")}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-sky-700 shadow-md hover:bg-slate-50 transition"
               >
                 Get Started Free
                 <ArrowRight className="h-4 w-4" />
-              </a>
+              </button>
+
               <p className="mt-3 text-xs text-slate-100/80">
                 Set up your first card in under 2 minutes.
               </p>
@@ -312,18 +319,10 @@ const LandingPage: React.FC = () => {
             </span>
           </div>
           <div className="flex flex-wrap gap-4 text-xs text-slate-500">
-            <a href="#about" className="hover:text-slate-800">
-              About
-            </a>
-            <a href="/privacy" className="hover:text-slate-800">
-              Privacy Policy
-            </a>
-            <a href="/terms" className="hover:text-slate-800">
-              Terms
-            </a>
-            <a href="/contact" className="hover:text-slate-800">
-              Contact
-            </a>
+            <a className="hover:text-slate-800">About</a>
+            <a className="hover:text-slate-800">Privacy Policy</a>
+            <a className="hover:text-slate-800">Terms</a>
+            <a className="hover:text-slate-800">Contact</a>
           </div>
         </div>
       </footer>
