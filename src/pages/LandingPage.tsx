@@ -22,7 +22,7 @@ const featuresData: { icon: React.ElementType; title: string; desc: string }[] =
     {
       icon: Zap,
       title: "Instant Sharing",
-      desc: "Share via QR, NFC or link — recipients don't need an app.",
+      desc: "Share via QR, NFC or link — recipients don’t need an app.",
     },
     {
       icon: BarChart2,
@@ -49,20 +49,25 @@ const featuresData: { icon: React.ElementType; title: string; desc: string }[] =
       title: "Team Management",
       desc: "Share cards and contacts across your team with access control.",
     },
+
+    // ✅ UPDATED FEATURE 1
     {
-      icon: Calendar,
-      title: "Meeting Sync",
-      desc: "Auto-add follow-ups to calendar and reminders.",
+      icon: Users,
+      title: "Contact Management",
+      desc: "Every connection flows automatically into your CRM with notes, tags, and activity.",
     },
+
+    // ✅ UPDATED FEATURE 2
     {
-      icon: PieChart,
-      title: "Advanced Insights",
-      desc: "Funnels & channel performance to optimize outreach.",
+      icon: Smartphone,
+      title: "Customizable Cards",
+      desc: "Choose from premium templates, layouts and colors to match your brand perfectly.",
     },
+
     {
       icon: Tag,
       title: "Smart Tags & Filters",
-      desc: "Tag and segment contacts for targeted follow-ups.",
+      desc: "Segment your contacts and follow-ups with intelligent tagging.",
     },
   ];
 
