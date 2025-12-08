@@ -1,8 +1,3 @@
-// src/pages/LandingPage.tsx
-// Replace your existing LandingPage.tsx with this file.
-// Requires: lucide-react installed (`npm install lucide-react`).
-// Works with your existing onNavigate(page) navigation pattern.
-
 import React, { useEffect, useState } from "react";
 import {
   ArrowRight,
@@ -27,7 +22,7 @@ const featuresData: { icon: React.ElementType; title: string; desc: string }[] =
     {
       icon: Zap,
       title: "Instant Sharing",
-      desc: "Share via QR, NFC or link — recipients don’t need an app.",
+      desc: "Share via QR, NFC or link — recipients don't need an app.",
     },
     {
       icon: BarChart2,
@@ -72,7 +67,6 @@ const featuresData: { icon: React.ElementType; title: string; desc: string }[] =
   ];
 
 const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
-  // state to cycle highlighted feature on the live card
   const [activeFeatureIdx, setActiveFeatureIdx] = useState(0);
 
   useEffect(() => {
@@ -82,14 +76,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
     return () => clearInterval(t);
   }, []);
 
-  // small helper to get the active feature
   const activeFeature = featuresData[activeFeatureIdx];
 
   return (
     <div className="min-h-screen bg-white text-slate-900 antialiased">
-      {/* Inline local CSS for animations and small layout fixes */}
       <style>{`
-        /* Animated gradient headline */
         .gradient-animate {
           background-image: linear-gradient(90deg, #6B8CFF 0%, #7CC7FF 35%, #8B5CF6 70%, #EC4899 100%);
           background-size: 200% 100%;
@@ -105,7 +96,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
           100% { background-position: 0% 50%; }
         }
 
-        /* Floating decorative blobs */
         @keyframes floatUp {
           0% { transform: translateY(0px) rotate(0deg); }
           50% { transform: translateY(-8px) rotate(1deg); }
@@ -113,7 +103,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         }
         .float-anim { animation: floatUp 5s ease-in-out infinite; }
 
-        /* Live card small highlight animation */
         @keyframes pop {
           0% { transform: translateY(0) scale(1); opacity: 0.98; }
           50% { transform: translateY(-6px) scale(1.02); opacity: 1; }
@@ -121,11 +110,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         }
         .live-pop { animation: pop 3s ease-in-out infinite; }
 
-        /* reduce top hero gap on desktop and mobile */
-        .hero-top-padding { padding-top: 3.2rem; } /* smaller than previous pt-24 */
+        .hero-top-padding { padding-top: 3.2rem; }
       `}</style>
 
-      {/* NAV */}
       <header className="sticky top-0 z-40">
         <div className="backdrop-blur-sm bg-white/40 border-b border-white/30">
           <div className="mx-auto max-w-7xl px-6 py-3 flex items-center justify-between">
@@ -167,10 +154,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         </div>
       </header>
 
-      {/* HERO */}
       <main>
         <section className="relative overflow-hidden">
-          {/* decorative backdrop - keep but slightly moved so less top blank space */}
           <div
             aria-hidden
             className="absolute inset-x-0 -top-10 h-[420px] md:h-[520px] lg:h-[560px] -z-10"
@@ -182,7 +167,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
 
           <div className="mx-auto max-w-7xl px-6 hero-top-padding">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              {/* Left: text */}
               <div className="lg:col-span-7">
                 <div className="inline-flex items-center gap-3 rounded-full bg-white/50 px-3 py-1 text-xs font-medium text-indigo-700 mb-4 shadow-sm">
                   <svg width="14" height="14" viewBox="0 0 24 24" className="opacity-90">
@@ -231,10 +215,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                 </p>
               </div>
 
-              {/* Right: Live animated card */}
               <div className="lg:col-span-5 flex justify-center lg:justify-end">
                 <div className="relative w-[340px] sm:w-[380px] md:w-[440px]">
-                  {/* soft glows with float animation */}
                   <div
                     className="absolute -left-12 -top-12 w-64 h-64 rounded-3xl filter blur-3xl opacity-70 float-anim"
                     style={{ background: "linear-gradient(135deg,#6B8CFF,#8B5CF6)" }}
@@ -244,19 +226,16 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                     style={{ background: "linear-gradient(135deg,#7CC7FF,#6B8CFF)" }}
                   />
 
-                  {/* Card container (animated slightly) */}
                   <div
                     className="relative rounded-3xl p-5 shadow-[0_26px_50px_rgba(13,14,23,0.06)] bg-white border border-slate-100 overflow-hidden live-pop"
                     style={{ transform: "translateZ(0)" }}
                   >
-                    {/* small header */}
                     <div className="flex items-center justify-between text-xs text-slate-400">
                       <div>Multiple templates • QR & NFC</div>
                       <div className="text-xs text-indigo-600 font-medium">Live</div>
                     </div>
 
                     <div className="mt-4 flex gap-4 items-start">
-                      {/* left: stylized card visual (animated) */}
                       <div className="flex-1">
                         <div
                           className="relative rounded-xl overflow-hidden transform-gpu transition-transform duration-700"
@@ -283,7 +262,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                             </div>
                           </div>
 
-                          {/* subtle rotating corner accent */}
                           <div
                             className="absolute -right-6 -top-6 w-20 h-20 rounded-full opacity-40"
                             style={{
@@ -298,7 +276,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                         </div>
                       </div>
 
-                      {/* right: solution column with feature highlight */}
                       <div className="w-[180px]">
                         <div className="rounded-xl bg-slate-50 p-3">
                           <div className="text-[11px] text-slate-500">Phone</div>
@@ -330,11 +307,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                           </div>
                         </div>
 
-                        {/* small dynamic feature highlight below the solution box */}
                         <div className="mt-3 rounded-md p-3 text-xs border border-slate-100 bg-white">
                           <div className="flex items-center gap-3">
                             <div className="h-8 w-8 rounded-md flex items-center justify-center" style={{ background: "linear-gradient(135deg,#6B8CFF,#8B5CF6)" }}>
-                              <active-icon-placeholder />
+                              {React.createElement(activeFeature.icon, { className: "h-4 w-4 text-white" })}
                             </div>
                             <div>
                               <div className="text-[13px] font-semibold text-slate-900">
@@ -354,7 +330,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                     </div>
                   </div>
 
-                  {/* decorative small floating orb */}
                   <div
                     className="absolute -right-6 -top-6 float-anim opacity-30 w-20 h-20 rounded-full"
                     style={{ background: "linear-gradient(135deg,#8B5CF6,#6B8CFF)" }}
@@ -365,7 +340,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
           </div>
         </section>
 
-        {/* FEATURES GRID */}
         <section className="bg-white">
           <div className="mx-auto max-w-7xl px-6 py-12 md:py-16">
             <div className="text-center mb-10">
@@ -395,7 +369,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
           </div>
         </section>
 
-        {/* TEMPLATES CAROUSEL */}
         <section className="bg-slate-50 border-t border-slate-100">
           <div className="mx-auto max-w-7xl px-6 py-12">
             <div className="flex items-center justify-between mb-6">
@@ -424,7 +397,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
           </div>
         </section>
 
-        {/* FINAL CTA */}
         <section className="bg-gradient-to-r from-indigo-600 to-sky-500 text-white">
           <div className="mx-auto max-w-7xl px-6 py-12 text-center">
             <h3 className="text-2xl md:text-3xl font-extrabold">Ready to transform your networking?</h3>
@@ -440,4 +412,58 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
 
               <button
                 onClick={() => onNavigate("login")}
-                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-2.5 text-sm font-medium text
+                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-2.5 text-sm font-medium text-white hover:bg-white/20"
+              >
+                Sign In
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <footer className="bg-slate-900 text-slate-400">
+          <div className="mx-auto max-w-7xl px-6 py-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div>
+                <h4 className="font-semibold text-white mb-3">Product</h4>
+                <ul className="space-y-2 text-sm">
+                  <li><button onClick={() => onNavigate("signup")} className="hover:text-white">Features</button></li>
+                  <li><button onClick={() => onNavigate("signup")} className="hover:text-white">Pricing</button></li>
+                  <li><button onClick={() => onNavigate("signup")} className="hover:text-white">Templates</button></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-white mb-3">Company</h4>
+                <ul className="space-y-2 text-sm">
+                  <li><button onClick={() => onNavigate("signup")} className="hover:text-white">About</button></li>
+                  <li><button onClick={() => onNavigate("signup")} className="hover:text-white">Blog</button></li>
+                  <li><button onClick={() => onNavigate("signup")} className="hover:text-white">Careers</button></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-white mb-3">Support</h4>
+                <ul className="space-y-2 text-sm">
+                  <li><button onClick={() => onNavigate("signup")} className="hover:text-white">Help Center</button></li>
+                  <li><button onClick={() => onNavigate("signup")} className="hover:text-white">Contact</button></li>
+                  <li><button onClick={() => onNavigate("signup")} className="hover:text-white">Terms</button></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-white mb-3">Connect</h4>
+                <ul className="space-y-2 text-sm">
+                  <li><button className="hover:text-white">Twitter</button></li>
+                  <li><button className="hover:text-white">LinkedIn</button></li>
+                  <li><button className="hover:text-white">Instagram</button></li>
+                </ul>
+              </div>
+            </div>
+            <div className="border-t border-slate-800 mt-8 pt-8 text-center text-sm">
+              <p>&copy; 2024 CardSync. All rights reserved.</p>
+            </div>
+          </div>
+        </footer>
+      </main>
+    </div>
+  );
+};
+
+export default LandingPage;
