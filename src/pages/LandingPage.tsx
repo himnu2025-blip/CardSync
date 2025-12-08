@@ -1,18 +1,78 @@
 // src/pages/LandingPage.tsx
 import React from "react";
-import { ArrowRight, Play } from "lucide-react";
+import {
+  ArrowRight,
+  Play,
+  Zap,
+  BarChart2,
+  Share2,
+  Lock,
+  Smartphone,
+  Users,
+  Calendar,
+  PieChart,
+  Tag,
+} from "lucide-react";
 
 interface LandingPageProps {
   onNavigate: (page: string) => void;
 }
 
+const features: { icon: React.ElementType; title: string; desc: string }[] = [
+  {
+    icon: Zap,
+    title: "Instant Sharing",
+    desc: "Share your card via QR, NFC or link — recipients don't need an app.",
+  },
+  {
+    icon: BarChart2,
+    title: "Track Engagement",
+    desc: "See who viewed your card, when and where — actionable analytics.",
+  },
+  {
+    icon: Share2,
+    title: "Smart Follow-ups",
+    desc: "One-tap WhatsApp & email templates to convert leads faster.",
+  },
+  {
+    icon: Lock,
+    title: "Secure & Private",
+    desc: "Data encryption and privacy controls you can trust.",
+  },
+  {
+    icon: Smartphone,
+    title: "Works Everywhere",
+    desc: "Optimized for mobile, tablet and desktop.",
+  },
+  {
+    icon: Users,
+    title: "Team Management",
+    desc: "Share cards and contacts across your team with access control.",
+  },
+  {
+    icon: Calendar,
+    title: "Meeting Sync",
+    desc: "Add follow-ups to calendar and schedule reminders automatically.",
+  },
+  {
+    icon: PieChart,
+    title: "Advanced Insights",
+    desc: "Funnels and channel performance to optimise your outreach.",
+  },
+  {
+    icon: Tag,
+    title: "Smart Tags & Filters",
+    desc: "Tag, filter and segment contacts for targeted follow-ups.",
+  },
+];
+
 const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
   return (
     <div className="min-h-screen bg-white text-slate-900 antialiased">
-      {/* TOP BACKDROP / NAV */}
+      {/* NAV */}
       <header className="sticky top-0 z-40">
         <div className="backdrop-blur-sm bg-white/40 border-b border-white/30">
-          <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
+          <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div
                 aria-hidden
@@ -40,10 +100,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                 className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-lg"
                 style={{
                   background:
-                    "linear-gradient(90deg,#6B8CFF 0%, #7CC7FF 50%, #8B5CF6 100%)",
+                    "linear-gradient(90deg,#6B8CFF 0%, #7CC7FF 55%, #8B5CF6 100%)",
                 }}
               >
-                Get Started Free
+                Get Started — It's Free
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>
@@ -54,7 +114,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
       {/* HERO */}
       <main>
         <section className="relative overflow-hidden">
-          {/* big soft gradient background like screenshot */}
+          {/* background */}
           <div
             aria-hidden
             className="absolute inset-x-0 top-0 h-[420px] md:h-[520px] lg:h-[640px] -z-10"
@@ -66,7 +126,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
 
           <div className="mx-auto max-w-7xl px-6 pt-24 pb-12 md:pt-32 md:pb-20">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              {/* Left: Text */}
+              {/* Left: text */}
               <div className="lg:col-span-7">
                 <div className="inline-flex items-center gap-3 rounded-full bg-white/50 px-3 py-1 text-xs font-medium text-indigo-700 mb-6 shadow-sm">
                   <svg width="14" height="14" viewBox="0 0 24 24" className="opacity-90">
@@ -76,13 +136,24 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <h1 className="text-4xl md:text-5xl lg:text-[64px] leading-tight font-extrabold tracking-tight text-slate-900">
-                  Your Smart Digital <span className="bg-clip-text text-transparent" style={{background: "linear-gradient(90deg,#6B8CFF,#8B5CF6)"}}>Business Card</span>
+                  Your Smart Digital{" "}
+                  <span
+                    className="bg-clip-text text-transparent"
+                    style={{ background: "linear-gradient(90deg,#6B8CFF,#8B5CF6)" }}
+                  >
+                    Business Card
+                  </span>
                 </h1>
 
-                <p className="mt-6 max-w-2xl text-lg text-slate-600">
-                  Share your contact instantly with QR or NFC, capture leads automatically, and follow up with high-quality templates — all inside a lightweight CRM built for modern professionals.
-                </p>
+                <div className="mt-4">
+                  <div className="text-lg text-slate-600 max-w-2xl">
+                    <strong className="font-medium">Not just a card — a complete business solution.</strong>{" "}
+                    Share your contact instantly with QR or NFC, capture leads automatically, and follow up with high-quality templates —
+                    <strong> all inside a lightweight and powerful CRM built for modern professionals.</strong>
+                  </div>
+                </div>
 
+                {/* CTAs */}
                 <div className="mt-8 flex flex-col sm:flex-row gap-3 items-start sm:items-center">
                   <button
                     onClick={() => onNavigate("signup")}
@@ -97,7 +168,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                   </button>
 
                   <button
-                    onClick={() => window.scrollTo({ top: 800, behavior: "smooth" })}
+                    onClick={() => window.scrollTo({ top: 820, behavior: "smooth" })}
                     className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium bg-white border border-slate-200 shadow-sm"
                   >
                     <Play className="h-4 w-4 text-indigo-600" />
@@ -110,55 +181,77 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                 </p>
               </div>
 
-              {/* Right: Visual / card preview */}
+              {/* Right: premium card visual with "cut card -> solution" effect */}
               <div className="lg:col-span-5 flex justify-center lg:justify-end">
-                <div className="relative w-[340px] sm:w-[380px] md:w-[420px]">
-                  {/* floating gradient shape */}
-                  <div className="absolute -left-10 -top-10 w-56 h-56 rounded-3xl filter blur-3xl opacity-70" style={{background: "linear-gradient(135deg,#6B8CFF,#8B5CF6)"}} />
-                  <div className="absolute -right-8 -bottom-8 w-44 h-44 rounded-2xl filter blur-2xl opacity-60" style={{background: "linear-gradient(135deg,#7CC7FF,#6B8CFF)"}} />
+                <div className="relative w-[360px] sm:w-[420px] md:w-[480px]">
+                  {/* soft glows */}
+                  <div className="absolute -left-12 -top-12 w-72 h-72 rounded-3xl filter blur-3xl opacity-70" style={{ background: "linear-gradient(135deg,#6B8CFF,#8B5CF6)" }} />
+                  <div className="absolute -right-12 -bottom-12 w-56 h-56 rounded-2xl filter blur-2xl opacity-60" style={{ background: "linear-gradient(135deg,#7CC7FF,#6B8CFF)" }} />
 
-                  <div className="relative rounded-3xl bg-white border border-slate-100 shadow-[0_30px_60px_rgba(13,14,23,0.07)] overflow-hidden">
-                    <div className="p-6">
-                      <div className="flex items-center gap-4">
-                        <div className="h-16 w-16 rounded-2xl flex items-center justify-center font-bold text-lg text-white" style={{background: "linear-gradient(135deg,#6B8CFF,#8B5CF6)"}}>
-                          NV
+                  {/* container */}
+                  <div className="relative rounded-3xl p-5 shadow-[0_30px_60px_rgba(13,14,23,0.07)] bg-white border border-slate-100 overflow-hidden">
+                    {/* top row: small tag */}
+                    <div className="flex items-center justify-between">
+                      <div className="text-xs text-slate-500">Multiple templates • QR & NFC</div>
+                      <div className="text-xs text-slate-400">Live</div>
+                    </div>
+
+                    <div className="mt-4 flex gap-4 items-start">
+                      {/* left "card" (visual) */}
+                      <div className="flex-1">
+                        <div className="relative rounded-xl overflow-hidden" style={{ transform: "skewX(-6deg)", boxShadow: "0 18px 40px rgba(59,58,88,0.06)" }}>
+                          <div className="p-4" style={{ background: "linear-gradient(135deg,#6B8CFF,#8B5CF6)" }}>
+                            <div className="flex items-center gap-3">
+                              <div className="h-12 w-12 rounded-lg flex items-center justify-center text-white font-bold">NV</div>
+                              <div>
+                                <div className="text-sm font-semibold text-white">Nitesh Vohra</div>
+                                <div className="text-[12px] text-white/90">Founder, CardSync</div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <div>
-                          <div className="text-lg font-semibold text-slate-900">Nitesh Vohra</div>
-                          <div className="text-xs text-slate-500">Founder, CardSync</div>
-                        </div>
+
+                        <div className="mt-3 text-[12px] text-slate-500">Tap, scan or share — no app needed</div>
                       </div>
 
-                      <div className="mt-5 grid grid-cols-2 gap-3 text-xs">
+                      {/* right "solution" column */}
+                      <div className="w-[180px]">
                         <div className="rounded-xl bg-slate-50 p-3">
                           <div className="text-[11px] text-slate-500">Phone</div>
                           <div className="text-sm font-medium text-slate-900">+91 ••••• ••••</div>
-                        </div>
-                        <div className="rounded-xl bg-slate-50 p-3">
-                          <div className="text-[11px] text-slate-500">Email</div>
+
+                          <div className="mt-3 text-[11px] text-slate-500">Email</div>
                           <div className="text-sm font-medium text-slate-900">hello@cardsync.app</div>
+
+                          <div className="mt-4 flex gap-2">
+                            <button className="flex-1 rounded-full bg-slate-900 px-3 py-2 text-xs font-semibold text-white">Share QR</button>
+                            <button className="flex-1 rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-900">Save</button>
+                          </div>
+
+                          <div className="mt-4 rounded-lg bg-gradient-to-r from-indigo-700 to-sky-500 p-3 text-white text-xs">
+                            <div className="text-[10px] uppercase opacity-90">Live analytics</div>
+                            <div className="text-sm font-semibold">124 views • 38 saves</div>
+                          </div>
                         </div>
                       </div>
+                    </div>
 
-                      <div className="mt-5 flex gap-3">
-                        <button className="flex-1 rounded-full bg-slate-900 px-3 py-2 text-xs font-semibold text-white">Share QR</button>
-                        <button className="flex-1 rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-900">Save</button>
-                      </div>
-
-                      <div className="mt-4 rounded-xl bg-gradient-to-r from-indigo-700 to-sky-500 p-3 text-white text-xs flex items-center justify-between">
-                        <div>
-                          <div className="text-[10px] uppercase opacity-90">Live analytics</div>
-                          <div className="text-sm font-semibold">124 views • 38 saves</div>
-                        </div>
-                        <div className="h-8 w-12 rounded-md bg-white/20" />
-                      </div>
+                    {/* small caption */}
+                    <div className="mt-4 text-[12px] text-slate-500 text-center">
+                      A single card that becomes a complete business solution.
                     </div>
                   </div>
 
-                  {/* small caption */}
-                  <div className="mt-4 text-[12px] text-slate-500 text-center">
-                    Multiple templates • QR & NFC • Track engagement
-                  </div>
+                  {/* floating subtle animation */}
+                  <style>{`
+                    @keyframes floatUp {
+                      0% { transform: translateY(0px) }
+                      50% { transform: translateY(-8px) }
+                      100% { transform: translateY(0px) }
+                    }
+                    .float-anim { animation: floatUp 5s ease-in-out infinite; }
+                  `}</style>
+                  <div className="absolute -right-6 -top-6 float-anim opacity-30 w-20 h-20 rounded-full" style={{ background: "linear-gradient(135deg,#8B5CF6,#6B8CFF)" }} />
                 </div>
               </div>
             </div>
@@ -169,32 +262,33 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         <section className="bg-white">
           <div className="mx-auto max-w-7xl px-6 py-16">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">Everything you need to network smarter</h2>
-              <p className="mt-3 text-slate-500 max-w-2xl mx-auto">Powerful features designed for modern professionals who value meaningful connections.</p>
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
+                Everything you need to network smarter
+              </h2>
+              <p className="mt-3 text-slate-500 max-w-2xl mx-auto">
+                Powerful features designed for modern professionals who value meaningful connections.
+              </p>
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {[
-                ["Instant Sharing", "Share your card via QR, NFC or link — recipients don't need an app."],
-                ["Track Engagement", "See who viewed your card, when, and where. Actionable analytics."],
-                ["Smart Follow-ups", "One-tap WhatsApp & email templates to convert leads faster."],
-                ["Secure & Private", "Data encrypted in transit and at rest. Full privacy controls."],
-                ["Works Everywhere", "Optimized for mobile, tablet and desktop."],
-                ["Team Management", "Share cards and contacts across your team with access controls."],
-              ].map(([title, desc]) => (
-                <div key={title} className="rounded-2xl border border-slate-100 p-6 shadow-sm hover:shadow-md transition">
-                  <div className="h-12 w-12 rounded-lg mb-4 flex items-center justify-center" style={{background: "linear-gradient(135deg,#6B8CFF,#8B5CF6)"}}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12h18" stroke="white" strokeWidth="1.6" strokeLinecap="round"/></svg>
+              {features.map((f) => {
+                const Icon = f.icon;
+                return (
+                  <div key={f.title} className="rounded-2xl border border-slate-100 p-6 shadow-sm hover:shadow-md transition">
+                    <div className="mb-4 inline-flex items-center justify-center rounded-lg h-12 w-12" style={{ background: "linear-gradient(135deg,#6B8CFF,#8B5CF6)" }}>
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+
+                    <h3 className="text-lg font-semibold text-slate-900 mb-2">{f.title}</h3>
+                    <p className="text-sm text-slate-600">{f.desc}</p>
                   </div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">{title}</h3>
-                  <p className="text-sm text-slate-600">{desc}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* TEMPLATES CAROUSEL (simple scroll) */}
+        {/* TEMPLATES CAROUSEL */}
         <section className="bg-slate-50 border-t border-slate-100">
           <div className="mx-auto max-w-7xl px-6 py-12">
             <div className="flex items-center justify-between mb-6">
@@ -204,12 +298,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
 
             <div className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory">
               {["Modern Blue", "Minimal White", "Luxury Dark", "Gradient Glow", "Corporate"].map((name, idx) => (
-                <div key={name} className="min-w-[260px] snap-start rounded-xl p-4 shadow-lg" style={{background: idx % 2 === 0 ? "linear-gradient(135deg,#6B8CFF,#8B5CF6)" : "linear-gradient(135deg,#ffffff,#f1f5ff)"}}>
+                <div key={name} className="min-w-[260px] snap-start rounded-xl p-4 shadow-lg" style={{ background: idx % 2 === 0 ? "linear-gradient(135deg,#6B8CFF,#8B5CF6)" : "linear-gradient(135deg,#ffffff,#f1f5ff)" }}>
                   <div className={`p-4 rounded-lg ${idx % 2 === 0 ? "text-white" : "text-slate-900"}`}>
                     <div className="flex items-center gap-3 mb-3">
-                      <div className={`h-12 w-12 rounded-xl flex items-center justify-center font-bold`} style={{background: idx % 2 === 0 ? "rgba(255,255,255,0.12)" : "#eef2ff"}}>
-                        JD
-                      </div>
+                      <div className={`h-12 w-12 rounded-xl flex items-center justify-center font-bold`} style={{ background: idx % 2 === 0 ? "rgba(255,255,255,0.12)" : "#eef2ff" }}>JD</div>
                       <div>
                         <div className="font-semibold">{name} Template</div>
                         <div className="text-[12px] opacity-80">Product Designer</div>
@@ -219,32 +311,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* TESTIMONIAL / TRUST */}
-        <section className="bg-white border-t border-slate-100">
-          <div className="mx-auto max-w-7xl px-6 py-12 flex flex-col lg:flex-row items-center gap-8">
-            <div className="lg:w-1/2">
-              <div className="text-sm text-slate-500 mb-3">Trusted by</div>
-              <div className="flex flex-wrap items-center gap-6">
-                <div className="opacity-60">Acme</div>
-                <div className="opacity-60">BlueWave</div>
-                <div className="opacity-60">StudioPro</div>
-                <div className="opacity-60">FinCore</div>
-              </div>
-            </div>
-
-            <div className="lg:w-1/2 bg-slate-50 rounded-2xl p-6">
-              <div className="text-lg font-semibold text-slate-900">“CardSync changed how we network — leads doubled and follow-ups are effortless.”</div>
-              <div className="mt-4 flex items-center gap-3">
-                <div className="h-10 w-10 rounded-md bg-indigo-600 flex items-center justify-center text-white font-semibold">AM</div>
-                <div>
-                  <div className="text-sm font-medium">Aman Mehta</div>
-                  <div className="text-xs text-slate-500">Growth Lead, StudioPro</div>
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -278,7 +344,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
       <footer className="bg-white border-t border-slate-100">
         <div className="mx-auto max-w-7xl px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="h-8 w-8 rounded-md" style={{background: "linear-gradient(135deg,#6B8CFF,#8B5CF6)"}} />
+            <div className="h-8 w-8 rounded-md" style={{ background: "linear-gradient(135deg,#6B8CFF,#8B5CF6)" }} />
             <div>
               <div className="font-semibold">CardSync</div>
               <div className="text-xs text-slate-500">Secure digital business cards & CRM</div>
