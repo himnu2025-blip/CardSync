@@ -69,6 +69,37 @@ const features: { icon: React.ElementType; title: string; desc: string }[] = [
 const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
   return (
     <div className="min-h-screen bg-white text-slate-900 antialiased">
+      {/* Local CSS for animated gradient text and small float animation */}
+      <style>{`
+        /* animated gradient for the headline text */
+        .gradient-animate {
+          background-image: linear-gradient(90deg, #6B8CFF 0%, #7CC7FF 35%, #8B5CF6 70%, #EC4899 100%);
+          background-size: 200% 100%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          display: inline-block;
+          animation: gradientShift 6s linear infinite;
+        }
+
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        /* subtle float animation used for decorative blobs */
+        @keyframes floatUp {
+          0% { transform: translateY(0px) rotate(0deg); opacity: 0.9; }
+          50% { transform: translateY(-10px) rotate(2deg); opacity: 1; }
+          100% { transform: translateY(0px) rotate(0deg); opacity: 0.9; }
+        }
+        .float-anim { animation: floatUp 5s ease-in-out infinite; }
+
+        /* ensure gradient text doesn't wrap awkwardly on very small screens */
+        .no-wrap-gradient { white-space: nowrap; }
+      `}</style>
+
       {/* NAV */}
       <header className="sticky top-0 z-40">
         <div className="backdrop-blur-sm bg-white/40 border-b border-white/30">
@@ -114,7 +145,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
       {/* HERO */}
       <main>
         <section className="relative overflow-hidden">
-          {/* background */}
+          {/* decorative backdrop similar to screenshot */}
           <div
             aria-hidden
             className="absolute inset-x-0 top-0 h-[420px] md:h-[520px] lg:h-[640px] -z-10"
@@ -135,12 +166,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                   The future of networking
                 </div>
 
+                {/* Headline with animated gradient "Business Card" */}
                 <h1 className="text-4xl md:text-5xl lg:text-[64px] leading-tight font-extrabold tracking-tight text-slate-900">
                   Your Smart Digital{" "}
-                  <span
-                    className="bg-clip-text text-transparent"
-                    style={{ background: "linear-gradient(90deg,#6B8CFF,#8B5CF6)" }}
-                  >
+                  <span className="gradient-animate no-wrap-gradient" aria-hidden>
                     Business Card
                   </span>
                 </h1>
@@ -181,23 +210,20 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                 </p>
               </div>
 
-              {/* Right: premium card visual with "cut card -> solution" effect */}
+              {/* Right: premium card visual */}
               <div className="lg:col-span-5 flex justify-center lg:justify-end">
                 <div className="relative w-[360px] sm:w-[420px] md:w-[480px]">
-                  {/* soft glows */}
-                  <div className="absolute -left-12 -top-12 w-72 h-72 rounded-3xl filter blur-3xl opacity-70" style={{ background: "linear-gradient(135deg,#6B8CFF,#8B5CF6)" }} />
-                  <div className="absolute -right-12 -bottom-12 w-56 h-56 rounded-2xl filter blur-2xl opacity-60" style={{ background: "linear-gradient(135deg,#7CC7FF,#6B8CFF)" }} />
+                  {/* glows */}
+                  <div className="absolute -left-12 -top-12 w-72 h-72 rounded-3xl filter blur-3xl opacity-70 float-anim" style={{ background: "linear-gradient(135deg,#6B8CFF,#8B5CF6)" }} />
+                  <div className="absolute -right-12 -bottom-12 w-56 h-56 rounded-2xl filter blur-2xl opacity-60 float-anim" style={{ background: "linear-gradient(135deg,#7CC7FF,#6B8CFF)" }} />
 
-                  {/* container */}
                   <div className="relative rounded-3xl p-5 shadow-[0_30px_60px_rgba(13,14,23,0.07)] bg-white border border-slate-100 overflow-hidden">
-                    {/* top row: small tag */}
-                    <div className="flex items-center justify-between">
-                      <div className="text-xs text-slate-500">Multiple templates • QR & NFC</div>
-                      <div className="text-xs text-slate-400">Live</div>
+                    <div className="flex items-center justify-between text-xs text-slate-400">
+                      <div>Multiple templates • QR & NFC</div>
+                      <div>Live</div>
                     </div>
 
                     <div className="mt-4 flex gap-4 items-start">
-                      {/* left "card" (visual) */}
                       <div className="flex-1">
                         <div className="relative rounded-xl overflow-hidden" style={{ transform: "skewX(-6deg)", boxShadow: "0 18px 40px rgba(59,58,88,0.06)" }}>
                           <div className="p-4" style={{ background: "linear-gradient(135deg,#6B8CFF,#8B5CF6)" }}>
@@ -214,7 +240,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                         <div className="mt-3 text-[12px] text-slate-500">Tap, scan or share — no app needed</div>
                       </div>
 
-                      {/* right "solution" column */}
                       <div className="w-[180px]">
                         <div className="rounded-xl bg-slate-50 p-3">
                           <div className="text-[11px] text-slate-500">Phone</div>
@@ -236,21 +261,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                       </div>
                     </div>
 
-                    {/* small caption */}
                     <div className="mt-4 text-[12px] text-slate-500 text-center">
                       A single card that becomes a complete business solution.
                     </div>
                   </div>
 
-                  {/* floating subtle animation */}
-                  <style>{`
-                    @keyframes floatUp {
-                      0% { transform: translateY(0px) }
-                      50% { transform: translateY(-8px) }
-                      100% { transform: translateY(0px) }
-                    }
-                    .float-anim { animation: floatUp 5s ease-in-out infinite; }
-                  `}</style>
                   <div className="absolute -right-6 -top-6 float-anim opacity-30 w-20 h-20 rounded-full" style={{ background: "linear-gradient(135deg,#8B5CF6,#6B8CFF)" }} />
                 </div>
               </div>
@@ -364,3 +379,4 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
 };
 
 export default LandingPage;
+```0
