@@ -379,4 +379,3 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
 };
 
 export default LandingPage;
-```0
