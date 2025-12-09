@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { ThemeProvider, useTheme } from "./contexts/ThemeContext";
 import { authService } from "./lib/authService";
 import { ToastContainer } from "./components/ui/toast";
 
@@ -26,9 +27,9 @@ export type Page =
 function AppContent() {
   const { user, loading } = useAuth();
   const [currentPage, setCurrentPage] = useState<Page>("landing");
-  const [selectedContactId, setSelectedContactId] = useState<string | null>(
-    null
-  );
+  const [selectedContactId, setSelectedContactId] = useState<
+    string | null
+  >(null);
 
   // Auto-redirect based on auth state
   useEffect(() => {
@@ -37,7 +38,9 @@ function AppContent() {
     } else if (
       !user &&
       !loading &&
-      !["landing", "login", "signup", "public-card"].includes(currentPage)
+      !["landing", "login", "signup", "public-card"].includes(
+        currentPage
+      )
     ) {
       setCurrentPage("landing");
     }
@@ -116,7 +119,9 @@ function AppContent() {
 function App() {
   return (
     <AuthProvider>
-      <AppContent />
+      <ThemeProvider>
+        <AppContent />
+      </ThemeProvider>
     </AuthProvider>
   );
 }
