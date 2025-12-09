@@ -1,43 +1,47 @@
-const templates = [
-  { id: 1, name: 'Modern Blue', gradient: 'from-blue-500 to-cyan-500', layout: 'left' },
-  { id: 2, name: 'Purple Dream', gradient: 'from-purple-500 to-pink-500', layout: 'center' },
-  { id: 3, name: 'Sunset', gradient: 'from-orange-500 to-red-500', layout: 'left' },
-  { id: 4, name: 'Forest', gradient: 'from-green-500 to-teal-500', layout: 'minimal' },
-  { id: 5, name: 'Midnight', gradient: 'from-indigo-900 to-purple-900', layout: 'center' },
-  { id: 6, name: 'Rose Gold', gradient: 'from-pink-400 to-rose-600', layout: 'left' },
-];
+import BusinessCardPreview from "./BusinessCardPreview";
 
 interface TemplateSelectorProps {
-  onSelectTemplate: (templateId: number) => void;
+  onSelectTemplate: (templateId: string) => void;
 }
 
-export default function TemplateSelector({ onSelectTemplate }: TemplateSelectorProps) {
+const templates = [
+  { id: "modern-blue", name: "Modern Blue" },
+  { id: "minimal-white", name: "Minimal White" },
+  { id: "luxury-dark", name: "Luxury Dark" },
+  { id: "gradient-glow", name: "Gradient Glow" },
+];
+
+export default function TemplateSelector({
+  onSelectTemplate,
+}: TemplateSelectorProps) {
   return (
-    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {templates.map((template) => (
-        <button
-          key={template.id}
-          onClick={() => onSelectTemplate(template.id)}
-          className="group relative"
-        >
-          <div className="relative overflow-hidden rounded-2xl border-2 border-border hover:border-primary transition-all">
-            <div className={`aspect-[3/2] bg-gradient-to-br ${template.gradient} p-6 flex flex-col justify-between text-white`}>
-              <div className={template.layout === 'center' ? 'text-center mx-auto' : ''}>
-                <div className={`w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm mb-3 ${template.layout === 'center' ? 'mx-auto' : ''}`}></div>
-                <h3 className="text-lg font-bold">John Doe</h3>
-                <p className="text-sm text-white/90">Product Designer</p>
+    <div className="space-y-4">
+      <p className="text-sm text-slate-300">
+        Pick a starting template. You can customize colors, text and layout
+        later.
+      </p>
+      <div className="grid gap-4 md:grid-cols-2">
+        {templates.map((tpl) => (
+          <button
+            key={tpl.id}
+            type="button"
+            onClick={() => onSelectTemplate(tpl.id)}
+            className="group flex flex-col gap-2 rounded-xl border border-slate-800 bg-slate-950/80 p-3 text-left hover:border-blue-500/70 hover:bg-slate-900/90 transition-colors"
+          >
+            <div className="h-32 w-full rounded-lg bg-gradient-to-br from-slate-800 to-slate-900">
+              <BusinessCardPreview />
+            </div>
+            <div>
+              <div className="text-sm font-medium text-slate-100">
+                {tpl.name}
               </div>
-              <div className={template.layout === 'center' ? 'text-center' : ''}>
-                <div className="text-xs text-white/80">Sample Card</div>
+              <div className="text-xs text-slate-400">
+                Professional layout optimized for quick sharing
               </div>
             </div>
-          </div>
-          <div className="mt-2 text-center">
-            <h4 className="font-semibold">{template.name}</h4>
-            <p className="text-sm text-muted-foreground capitalize">{template.layout} Layout</p>
-          </div>
-        </button>
-      ))}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
