@@ -12,6 +12,7 @@ import DashboardHeader from "@/components/layout/DashboardHeader";
 import MobileNav from "@/components/layout/MobileNav";
 import ContactNotes from "@/components/features/ContactNotes";
 import ContactTags from "@/components/features/ContactTags";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface ContactDetailPageProps {
   contactId: string | null;
@@ -22,11 +23,16 @@ export default function ContactDetailPage({
   contactId,
   onNavigate,
 }: ContactDetailPageProps) {
-  // For now, static mock; you can later fetch by contactId
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const rootClass =
+    "min-h-screen " +
+    (isDark ? "bg-slate-950 text-slate-100" : "bg-slate-50 text-slate-900");
+
   const name = "Sarah Johnson";
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className={rootClass}>
       <div className="mx-auto max-w-6xl px-4 pb-24 pt-4">
         <DashboardHeader onNavigate={onNavigate} />
 
@@ -39,7 +45,6 @@ export default function ContactDetailPage({
           Back to Contacts
         </button>
 
-        {/* Contact header */}
         <section className="flex flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-950/80 p-5 md:flex-row">
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-base font-semibold text-slate-100">
@@ -85,7 +90,6 @@ export default function ContactDetailPage({
           </div>
         </section>
 
-        {/* Tags + info + notes */}
         <section className="mt-6 grid gap-6 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
           <div className="space-y-6">
             <div className="rounded-xl border border-slate-800 bg-slate-950/80 p-4">
@@ -94,10 +98,7 @@ export default function ContactDetailPage({
               </h2>
               <div className="grid gap-3 text-xs text-slate-300">
                 <InfoField label="Phone" value="+1 234 567 890" />
-                <InfoField
-                  label="Email"
-                  value="sarah@techcorp.com"
-                />
+                <InfoField label="Email" value="sarah@techcorp.com" />
                 <InfoField label="Company" value="Tech Corp" />
                 <InfoField label="Role" value="Product Manager" />
               </div>
