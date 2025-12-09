@@ -7,6 +7,7 @@ import DashboardHeader from "@/components/layout/DashboardHeader";
 import MobileNav from "@/components/layout/MobileNav";
 import ContactCard from "@/components/features/ContactCard";
 import TagFilter from "@/components/features/TagFilter";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface CRMPageProps {
   onNavigate: (page: Page) => void;
@@ -49,6 +50,11 @@ export default function CRMPage({
 }: CRMPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const rootClass =
+    "min-h-screen " +
+    (isDark ? "bg-slate-950 text-slate-100" : "bg-slate-50 text-slate-900");
 
   const filteredContacts = useMemo(() => {
     return mockContacts.filter((c) => {
@@ -65,14 +71,12 @@ export default function CRMPage({
 
   const toggleTag = (tag: string) => {
     setSelectedTags((prev) =>
-      prev.includes(tag)
-        ? prev.filter((t) => t !== tag)
-        : [...prev, tag]
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
     );
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className={rootClass}>
       <div className="mx-auto max-w-6xl px-4 pb-24 pt-4">
         <DashboardHeader onNavigate={onNavigate} />
 
@@ -83,16 +87,12 @@ export default function CRMPage({
               Manage your professional network.
             </p>
           </div>
-          <Button
-            size="sm"
-            className="h-8 gap-1 rounded-full text-xs"
-          >
+          <Button size="sm" className="h-8 gap-1 rounded-full text-xs">
             <Plus className="h-3.5 w-3.5" />
             Add Contact
           </Button>
         </section>
 
-        {/* Search & Filter */}
         <section className="mt-6 space-y-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="relative w-full sm:max-w-xs">
@@ -116,7 +116,6 @@ export default function CRMPage({
 
           <TagFilter selectedTags={selectedTags} onToggleTag={toggleTag} />
 
-          {/* Contacts List */}
           <div className="mt-4 grid gap-3">
             {filteredContacts.map((contact) => (
               <ContactCard
