@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Page } from "@/App";
 import { useAuth } from "@/contexts/AuthContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import { authService } from "@/lib/authService";
 import { showToast } from "@/hooks/useToast";
 
@@ -15,6 +16,12 @@ interface LoginPageProps {
 
 export default function LoginPage({ mode, onNavigate }: LoginPageProps) {
   const { login } = useAuth();
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const rootClass =
+    "min-h-screen " +
+    (isDark ? "bg-slate-950 text-slate-100" : "bg-slate-50 text-slate-900");
+
   const [isSignup, setIsSignup] = useState(mode === "signup");
   const [step, setStep] = useState<"email" | "otp" | "complete">("email");
   const [loading, setLoading] = useState(false);
@@ -92,7 +99,7 @@ export default function LoginPage({ mode, onNavigate }: LoginPageProps) {
     : "Sign In";
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className={rootClass}>
       <div className="flex min-h-screen items-center justify-center px-4">
         <div className="w-full max-w-md rounded-2xl border border-slate-800 bg-slate-950/80 p-6 shadow-xl">
           <button
@@ -126,7 +133,6 @@ export default function LoginPage({ mode, onNavigate }: LoginPageProps) {
           </div>
 
           <form onSubmit={formSubmitHandler} className="space-y-4">
-            {/* Email (always in email step OR login) */}
             {(!isSignup || step === "email") && (
               <>
                 <div className="space-y-1.5">
@@ -170,7 +176,6 @@ export default function LoginPage({ mode, onNavigate }: LoginPageProps) {
               </>
             )}
 
-            {/* Signup OTP + extra fields */}
             {isSignup && step === "otp" && (
               <>
                 <div className="space-y-1.5">
@@ -242,7 +247,6 @@ export default function LoginPage({ mode, onNavigate }: LoginPageProps) {
             </Button>
           </form>
 
-          {/* Toggle login/signup */}
           {step === "email" && (
             <div className="mt-4 text-center text-xs text-slate-400">
               {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
