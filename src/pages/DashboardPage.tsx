@@ -1,10 +1,10 @@
-import { Eye, Share2, Users, Edit, QrCode } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Page } from '@/App';
-import MobileNav from '@/components/layout/MobileNav';
-import DashboardHeader from '@/components/layout/DashboardHeader';
-import BusinessCardPreview from '@/components/features/BusinessCardPreview';
-import StatCard from '@/components/features/StatCard';
+import { Eye, Share2, Users, Edit, QrCode } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Page } from "@/App";
+import MobileNav from "@/components/layout/MobileNav";
+import DashboardHeader from "@/components/layout/DashboardHeader";
+import BusinessCardPreview from "@/components/features/BusinessCardPreview";
+import StatCard from "@/components/features/StatCard";
 
 interface DashboardPageProps {
   onNavigate: (page: Page) => void;
@@ -12,85 +12,88 @@ interface DashboardPageProps {
 
 export default function DashboardPage({ onNavigate }: DashboardPageProps) {
   return (
-    <div className="min-h-screen bg-background pb-20 md:pb-0">
-      <DashboardHeader onNavigate={onNavigate} />
+    <div className="min-h-screen bg-slate-950 text-slate-100">
+      <div className="mx-auto max-w-6xl px-4 pb-24 pt-4">
+        <DashboardHeader onNavigate={onNavigate} />
 
-      <main className="container-custom py-6">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Welcome back, Alex!</h1>
-          <p className="text-muted-foreground">Manage your digital business card and contacts</p>
-        </div>
+        <section className="mt-6 space-y-2">
+          <h1 className="text-xl font-semibold">Welcome back, Alex!</h1>
+          <p className="text-xs text-slate-400">
+            Manage your digital business card and contacts.
+          </p>
+        </section>
 
-        {/* Stats Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        {/* Stats */}
+        <section className="mt-6 grid gap-4 md:grid-cols-3">
           <StatCard
-            icon={<Eye className="w-5 h-5" />}
+            icon={<Eye className="h-4 w-4" />}
             label="Card Views"
             value="1,284"
             trend="+12%"
           />
           <StatCard
-            icon={<Share2 className="w-5 h-5" />}
+            icon={<Share2 className="h-4 w-4" />}
             label="Shares"
             value="342"
             trend="+8%"
           />
           <StatCard
-            icon={<Users className="w-5 h-5" />}
+            icon={<Users className="h-4 w-4" />}
             label="Contacts"
             value="87"
             trend="+15%"
           />
-        </div>
+        </section>
 
-        {/* Card Preview Section */}
-        <div className="grid lg:grid-cols-2 gap-8">
-          <div>
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold">Your Business Card</h2>
+        {/* Card and quick actions */}
+        <section className="mt-8 grid gap-6 md:grid-cols-2">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm font-semibold">Your Business Card</h2>
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => onNavigate('card-builder')}
+                onClick={() => onNavigate("card-builder")}
+                className="h-8 gap-1 rounded-full border-slate-700 text-xs"
               >
-                <Edit className="w-4 h-4 mr-2" />
+                <Edit className="h-3.5 w-3.5" />
                 Edit
               </Button>
             </div>
             <BusinessCardPreview />
           </div>
 
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
-            <div className="space-y-3">
+          <div className="space-y-4">
+            <h2 className="text-sm font-semibold">Quick Actions</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
               <QuickActionButton
-                icon={<Edit className="w-5 h-5" />}
+                icon={<Edit className="h-4 w-4" />}
                 label="Edit Card"
                 description="Customize your business card"
-                onClick={() => onNavigate('card-builder')}
+                onClick={() => onNavigate("card-builder")}
               />
               <QuickActionButton
-                icon={<QrCode className="w-5 h-5" />}
+                icon={<QrCode className="h-4 w-4" />}
                 label="View QR Code"
                 description="Share your card via QR"
-                onClick={() => onNavigate('public-card')}
+                onClick={() => onNavigate("public-card")}
               />
               <QuickActionButton
-                icon={<Users className="w-5 h-5" />}
+                icon={<Users className="h-4 w-4" />}
                 label="My CRM"
                 description="Manage your contacts"
-                onClick={() => onNavigate('crm')}
+                onClick={() => onNavigate("crm")}
               />
               <QuickActionButton
-                icon={<Share2 className="w-5 h-5" />}
+                icon={<Share2 className="h-4 w-4" />}
                 label="Share Card"
                 description="Send via email or messaging"
                 onClick={() => {}}
               />
             </div>
           </div>
-        </div>
-      </main>
+        </section>
+      </div>
 
       <MobileNav currentPage="dashboard" onNavigate={onNavigate} />
     </div>
@@ -104,20 +107,24 @@ interface QuickActionButtonProps {
   onClick: () => void;
 }
 
-function QuickActionButton({ icon, label, description, onClick }: QuickActionButtonProps) {
+function QuickActionButton({
+  icon,
+  label,
+  description,
+  onClick,
+}: QuickActionButtonProps) {
   return (
     <button
+      type="button"
       onClick={onClick}
-      className="w-full p-4 rounded-xl bg-card border border-border hover:border-primary/50 hover:shadow-md transition-all text-left group"
+      className="flex flex-col items-start gap-2 rounded-xl border border-slate-800 bg-slate-950/80 p-4 text-left hover:border-blue-500/60 hover:bg-slate-900/80 transition-colors"
     >
-      <div className="flex items-center gap-4">
-        <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
-          {icon}
-        </div>
-        <div>
-          <h3 className="font-semibold">{label}</h3>
-          <p className="text-sm text-muted-foreground">{description}</p>
-        </div>
+      <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-slate-100">
+        {icon}
+      </span>
+      <div>
+        <h3 className="text-sm font-semibold text-slate-100">{label}</h3>
+        <p className="text-xs text-slate-400">{description}</p>
       </div>
     </button>
   );
