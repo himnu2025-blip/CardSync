@@ -1,6 +1,16 @@
-import { Phone, Mail, Globe, MapPin, Download, Share2, Linkedin, Twitter, Instagram } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Page } from '@/App';
+import {
+  Phone,
+  Mail,
+  Globe,
+  MapPin,
+  Download,
+  Share2,
+  Linkedin,
+  Twitter,
+  Instagram,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Page } from "@/App";
 
 interface PublicCardPageProps {
   onNavigate: (page: Page) => void;
@@ -8,66 +18,105 @@ interface PublicCardPageProps {
 
 export default function PublicCardPage({ onNavigate }: PublicCardPageProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5 flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl">
-        <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-2xl">
-          {/* Card Header with Gradient */}
-          <div className="h-32 gradient-primary"></div>
-
-          {/* Profile Section */}
-          <div className="px-6 pb-6">
-            <div className="flex flex-col items-center -mt-16 mb-6">
-              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-accent border-4 border-card flex items-center justify-center text-white text-4xl font-bold mb-4">
-                AJ
+    <div className="min-h-screen bg-slate-950 text-slate-100">
+      <div className="flex min-h-screen items-center justify-center px-4 py-8">
+        <div className="w-full max-w-md space-y-6">
+          {/* Card */}
+          <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500 via-cyan-400 to-purple-500 p-[1px] shadow-2xl">
+            <div className="space-y-4 rounded-3xl bg-slate-950/95 p-6">
+              {/* Profile */}
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-base font-semibold text-white">
+                  AJ
+                </div>
+                <div>
+                  <h1 className="text-lg font-semibold text-white">
+                    Alex Johnson
+                  </h1>
+                  <p className="text-xs text-slate-200">
+                    Senior Product Designer
+                  </p>
+                  <p className="text-[11px] text-slate-300">
+                    Innovation Labs Inc.
+                  </p>
+                </div>
               </div>
-              <h1 className="text-3xl font-bold mb-1">Alex Johnson</h1>
-              <p className="text-lg text-muted-foreground mb-2">Senior Product Designer</p>
-              <p className="text-muted-foreground">Innovation Labs Inc.</p>
-            </div>
 
-            {/* About Section */}
-            <div className="mb-6 text-center">
-              <p className="text-muted-foreground max-w-lg mx-auto">
-                Passionate about creating beautiful, user-centered digital experiences. 
-                10+ years in product design and UX strategy.
+              {/* About */}
+              <p className="text-xs text-slate-300">
+                Passionate about creating beautiful, user-centered digital
+                experiences. 10+ years in product design and UX strategy.
               </p>
-            </div>
 
-            {/* Contact Buttons */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-              <ContactButton icon={<Phone className="w-4 h-4" />} label="Call" />
-              <ContactButton icon={<Mail className="w-4 h-4" />} label="Email" />
-              <ContactButton icon={<Globe className="w-4 h-4" />} label="Website" />
-              <ContactButton icon={<Download className="w-4 h-4" />} label="Save" />
-            </div>
+              {/* Action buttons */}
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <ContactButton
+                  icon={<Phone className="h-3.5 w-3.5" />}
+                  label="Call"
+                />
+                <ContactButton
+                  icon={<Mail className="h-3.5 w-3.5" />}
+                  label="Email"
+                />
+                <ContactButton
+                  icon={<Globe className="h-3.5 w-3.5" />}
+                  label="Website"
+                />
+                <ContactButton
+                  icon={<Download className="h-3.5 w-3.5" />}
+                  label="Save"
+                />
+              </div>
 
-            {/* Contact Details */}
-            <div className="space-y-3 mb-6">
-              <ContactDetail icon={<Phone />} text="+1 (555) 123-4567" />
-              <ContactDetail icon={<Mail />} text="alex.johnson@innovationlabs.com" />
-              <ContactDetail icon={<Globe />} text="www.alexjohnson.design" />
-              <ContactDetail icon={<MapPin />} text="San Francisco, CA" />
-            </div>
+              {/* Details */}
+              <div className="space-y-2 text-xs text-slate-200">
+                <ContactDetail
+                  icon={<Phone className="h-3.5 w-3.5" />}
+                  text="+1 (555) 123-4567"
+                />
+                <ContactDetail
+                  icon={<Mail className="h-3.5 w-3.5" />}
+                  text="alex.johnson@innovationlabs.com"
+                />
+                <ContactDetail
+                  icon={<Globe className="h-3.5 w-3.5" />}
+                  text="www.alexjohnson.design"
+                />
+                <ContactDetail
+                  icon={<MapPin className="h-3.5 w-3.5" />}
+                  text="San Francisco, CA"
+                />
+              </div>
 
-            {/* Social Links */}
-            <div className="flex justify-center gap-3 mb-6">
-              <SocialButton icon={<Linkedin className="w-5 h-5" />} />
-              <SocialButton icon={<Twitter className="w-5 h-5" />} />
-              <SocialButton icon={<Instagram className="w-5 h-5" />} />
+              {/* Social */}
+              <div className="flex items-center justify-between pt-2">
+                <div className="flex gap-2">
+                  <SocialButton
+                    icon={<Linkedin className="h-4 w-4" />}
+                  />
+                  <SocialButton
+                    icon={<Twitter className="h-4 w-4" />}
+                  />
+                  <SocialButton
+                    icon={<Instagram className="h-4 w-4" />}
+                  />
+                </div>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="h-8 gap-1 rounded-full border-slate-600 bg-slate-950/80 text-[11px]"
+                >
+                  <Share2 className="h-3.5 w-3.5" />
+                  Share This Card
+                </Button>
+              </div>
             </div>
-
-            {/* Share Button */}
-            <Button className="w-full gradient-primary">
-              <Share2 className="w-4 h-4 mr-2" />
-              Share This Card
-            </Button>
           </div>
-        </div>
 
-        <div className="text-center mt-6">
           <button
-            onClick={() => onNavigate('dashboard')}
-            className="text-muted-foreground hover:text-foreground text-sm"
+            type="button"
+            onClick={() => onNavigate("dashboard")}
+            className="block w-full text-center text-[11px] text-slate-400 hover:text-slate-100"
           >
             Create your own digital card →
           </button>
@@ -84,11 +133,12 @@ interface ContactButtonProps {
 
 function ContactButton({ icon, label }: ContactButtonProps) {
   return (
-    <button className="flex flex-col items-center gap-2 p-3 rounded-xl bg-secondary hover:bg-secondary/80 transition-colors">
-      <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-        {icon}
-      </div>
-      <span className="text-xs font-medium">{label}</span>
+    <button
+      type="button"
+      className="flex items-center justify-center gap-2 rounded-xl bg-slate-900/80 px-3 py-2 text-slate-100"
+    >
+      {icon}
+      <span>{label}</span>
     </button>
   );
 }
@@ -100,9 +150,11 @@ interface ContactDetailProps {
 
 function ContactDetail({ icon, text }: ContactDetailProps) {
   return (
-    <div className="flex items-center gap-3 p-3 rounded-lg bg-secondary/50">
-      <div className="text-muted-foreground">{icon}</div>
-      <span className="text-sm">{text}</span>
+    <div className="flex items-center gap-2">
+      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-900 text-slate-100">
+        {icon}
+      </span>
+      <span>{text}</span>
     </div>
   );
 }
@@ -113,7 +165,10 @@ interface SocialButtonProps {
 
 function SocialButton({ icon }: SocialButtonProps) {
   return (
-    <button className="w-12 h-12 rounded-full bg-secondary hover:bg-primary hover:text-white transition-all flex items-center justify-center">
+    <button
+      type="button"
+      className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-900 text-slate-100"
+    >
       {icon}
     </button>
   );
