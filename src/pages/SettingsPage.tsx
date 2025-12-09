@@ -1,63 +1,79 @@
-import { ArrowLeft, User, CreditCard, LogOut, HelpCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Page } from '@/App';
-import DashboardHeader from '@/components/layout/DashboardHeader';
-import MobileNav from '@/components/layout/MobileNav';
+import { ArrowLeft, User, CreditCard, LogOut, HelpCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Page } from "@/App";
+import DashboardHeader from "@/components/layout/DashboardHeader";
+import MobileNav from "@/components/layout/MobileNav";
 
 interface SettingsPageProps {
   onNavigate: (page: Page) => void;
   onLogout: () => void;
 }
 
-export default function SettingsPage({ onNavigate, onLogout }: SettingsPageProps) {
+export default function SettingsPage({
+  onNavigate,
+  onLogout,
+}: SettingsPageProps) {
   return (
-    <div className="min-h-screen bg-background pb-20 md:pb-0">
-      <DashboardHeader onNavigate={onNavigate} />
+    <div className="min-h-screen bg-slate-950 text-slate-100">
+      <div className="mx-auto max-w-6xl px-4 pb-24 pt-4">
+        <DashboardHeader onNavigate={onNavigate} />
 
-      <main className="container-custom py-6 max-w-2xl">
-        <Button
-          variant="ghost"
-          onClick={() => onNavigate('dashboard')}
-          className="mb-6"
+        <button
+          type="button"
+          onClick={() => onNavigate("dashboard")}
+          className="mt-4 mb-4 inline-flex items-center gap-2 text-xs text-slate-400 hover:text-slate-100"
         >
-          <ArrowLeft className="w-4 h-4 mr-2" />
+          <ArrowLeft className="h-3.5 w-3.5" />
           Back to Dashboard
-        </Button>
+        </button>
 
-        <h1 className="text-2xl sm:text-3xl font-bold mb-6">Settings</h1>
+        <section className="space-y-2">
+          <h1 className="text-lg font-semibold">Settings</h1>
+          <p className="text-xs text-slate-400">
+            Manage your account and preferences.
+          </p>
+        </section>
 
-        <div className="space-y-3">
+        <section className="mt-6 space-y-4">
           <SettingItem
-            icon={<User className="w-5 h-5" />}
+            icon={<User className="h-4 w-4" />}
             label="Profile Settings"
             description="Update your personal information"
           />
           <SettingItem
-            icon={<CreditCard className="w-5 h-5" />}
+            icon={<CreditCard className="h-4 w-4" />}
             label="Subscription"
             description="Manage your plan and billing"
           />
           <SettingItem
-            icon={<HelpCircle className="w-5 h-5" />}
+            icon={<HelpCircle className="h-4 w-4" />}
             label="Support"
             description="Get help and contact us"
           />
-          <button
-            onClick={onLogout}
-            className="w-full p-4 rounded-xl bg-card border border-border hover:border-destructive/50 hover:bg-destructive/5 transition-all text-left group"
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-lg bg-destructive/10 text-destructive flex items-center justify-center">
-                <LogOut className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-destructive">Logout</h3>
-                <p className="text-sm text-muted-foreground">Sign out of your account</p>
-              </div>
+        </section>
+
+        <section className="mt-8 rounded-xl border border-slate-800 bg-slate-950/80 p-4">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-100">
+                <LogOut className="h-4 w-4 text-red-400" />
+                Logout
+              </h3>
+              <p className="text-xs text-slate-400">
+                Sign out of your account on this device.
+              </p>
             </div>
-          </button>
-        </div>
-      </main>
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-8 gap-1 rounded-full border-red-500/40 text-xs text-red-400 hover:bg-red-500/10"
+              onClick={onLogout}
+            >
+              Logout
+            </Button>
+          </div>
+        </section>
+      </div>
 
       <MobileNav currentPage="settings" onNavigate={onNavigate} />
     </div>
@@ -72,16 +88,14 @@ interface SettingItemProps {
 
 function SettingItem({ icon, label, description }: SettingItemProps) {
   return (
-    <button className="w-full p-4 rounded-xl bg-card border border-border hover:border-primary/50 hover:shadow-md transition-all text-left group">
-      <div className="flex items-center gap-4">
-        <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
-          {icon}
-        </div>
-        <div>
-          <h3 className="font-semibold">{label}</h3>
-          <p className="text-sm text-muted-foreground">{description}</p>
-        </div>
+    <div className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-950/80 p-4">
+      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-900 text-slate-100">
+        {icon}
       </div>
-    </button>
+      <div>
+        <h3 className="text-sm font-semibold text-slate-100">{label}</h3>
+        <p className="text-xs text-slate-400">{description}</p>
+      </div>
+    </div>
   );
 }
