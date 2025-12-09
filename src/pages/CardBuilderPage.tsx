@@ -7,6 +7,7 @@ import MobileNav from "@/components/layout/MobileNav";
 import CardEditor from "@/components/features/CardEditor";
 import BusinessCardPreview from "@/components/features/BusinessCardPreview";
 import TemplateSelector from "@/components/features/TemplateSelector";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface CardBuilderPageProps {
   onNavigate: (page: Page) => void;
@@ -14,9 +15,14 @@ interface CardBuilderPageProps {
 
 export default function CardBuilderPage({ onNavigate }: CardBuilderPageProps) {
   const [showTemplates, setShowTemplates] = useState(false);
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const rootClass =
+    "min-h-screen " +
+    (isDark ? "bg-slate-950 text-slate-100" : "bg-slate-50 text-slate-900");
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className={rootClass}>
       <div className="mx-auto max-w-6xl px-4 pb-24 pt-4">
         <DashboardHeader onNavigate={onNavigate} />
 
@@ -48,10 +54,7 @@ export default function CardBuilderPage({ onNavigate }: CardBuilderPageProps) {
               <Share2 className="h-3.5 w-3.5" />
               Share
             </Button>
-            <Button
-              size="sm"
-              className="h-8 gap-1 rounded-full text-xs"
-            >
+            <Button size="sm" className="h-8 gap-1 rounded-full text-xs">
               <Save className="h-3.5 w-3.5" />
               Save Card
             </Button>
@@ -69,9 +72,7 @@ export default function CardBuilderPage({ onNavigate }: CardBuilderPageProps) {
           {showTemplates ? (
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-sm font-semibold">
-                  Choose a Template
-                </h2>
+                <h2 className="text-sm font-semibold">Choose a Template</h2>
                 <Button
                   variant="outline"
                   size="sm"
@@ -109,7 +110,6 @@ export default function CardBuilderPage({ onNavigate }: CardBuilderPageProps) {
           )}
         </section>
 
-        {/* Mobile actions */}
         <div className="mt-6 flex items-center justify-between gap-3 sm:hidden">
           <Button
             variant="outline"
