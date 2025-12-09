@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Page } from "@/App";
 import DashboardHeader from "@/components/layout/DashboardHeader";
 import MobileNav from "@/components/layout/MobileNav";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface SettingsPageProps {
   onNavigate: (page: Page) => void;
@@ -13,8 +14,14 @@ export default function SettingsPage({
   onNavigate,
   onLogout,
 }: SettingsPageProps) {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const rootClass =
+    "min-h-screen " +
+    (isDark ? "bg-slate-950 text-slate-100" : "bg-slate-50 text-slate-900");
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className={rootClass}>
       <div className="mx-auto max-w-6xl px-4 pb-24 pt-4">
         <DashboardHeader onNavigate={onNavigate} />
 
