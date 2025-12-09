@@ -1,5 +1,3 @@
-import { TrendingUp } from 'lucide-react';
-
 interface StatCardProps {
   icon: React.ReactNode;
   label: string;
@@ -7,20 +5,28 @@ interface StatCardProps {
   trend: string;
 }
 
-export default function StatCard({ icon, label, value, trend }: StatCardProps) {
+export default function StatCard({
+  icon,
+  label,
+  value,
+  trend,
+}: StatCardProps) {
   return (
-    <div className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow">
-      <div className="flex items-center justify-between mb-2">
-        <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+    <div className="flex flex-col gap-2 rounded-xl border border-slate-800 bg-slate-950/80 p-4">
+      <div className="flex items-center justify-between">
+        <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-slate-200">
           {icon}
-        </div>
-        <div className="flex items-center gap-1 text-sm text-green-600">
-          <TrendingUp className="w-4 h-4" />
-          <span>{trend}</span>
-        </div>
+        </span>
+        <span className="text-xs font-medium text-emerald-400">
+          {trend}
+        </span>
       </div>
-      <div className="text-2xl font-bold mb-1">{value}</div>
-      <div className="text-sm text-muted-foreground">{label}</div>
+      <div>
+        <div className="text-lg font-semibold text-slate-100">
+          {value}
+        </div>
+        <div className="text-xs text-slate-400">{label}</div>
+      </div>
     </div>
   );
 }
