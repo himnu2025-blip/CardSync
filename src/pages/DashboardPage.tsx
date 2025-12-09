@@ -5,14 +5,21 @@ import MobileNav from "@/components/layout/MobileNav";
 import DashboardHeader from "@/components/layout/DashboardHeader";
 import BusinessCardPreview from "@/components/features/BusinessCardPreview";
 import StatCard from "@/components/features/StatCard";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface DashboardPageProps {
   onNavigate: (page: Page) => void;
 }
 
 export default function DashboardPage({ onNavigate }: DashboardPageProps) {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const rootClass =
+    "min-h-screen " +
+    (isDark ? "bg-slate-950 text-slate-100" : "bg-slate-50 text-slate-900");
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className={rootClass}>
       <div className="mx-auto max-w-6xl px-4 pb-24 pt-4">
         <DashboardHeader onNavigate={onNavigate} />
 
@@ -23,7 +30,6 @@ export default function DashboardPage({ onNavigate }: DashboardPageProps) {
           </p>
         </section>
 
-        {/* Stats */}
         <section className="mt-6 grid gap-4 md:grid-cols-3">
           <StatCard
             icon={<Eye className="h-4 w-4" />}
@@ -45,7 +51,6 @@ export default function DashboardPage({ onNavigate }: DashboardPageProps) {
           />
         </section>
 
-        {/* Card and quick actions */}
         <section className="mt-8 grid gap-6 md:grid-cols-2">
           <div className="space-y-3">
             <div className="flex items-center justify-between">
