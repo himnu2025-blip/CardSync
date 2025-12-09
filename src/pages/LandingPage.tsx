@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Page } from "@/App";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface LandingPageProps {
   onNavigate: (page: Page) => void;
@@ -55,7 +56,6 @@ const featuresData: {
     title: "Team Management",
     desc: "Share cards and contacts across your team with access control.",
   },
-  // Updated features
   {
     icon: Users,
     title: "Contact Management",
@@ -75,7 +75,8 @@ const featuresData: {
 
 const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
   const [activeFeatureIdx, setActiveFeatureIdx] = useState(0);
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark";
 
   useEffect(() => {
     const t = setInterval(
@@ -87,8 +88,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
 
   const activeFeature = featuresData[activeFeatureIdx];
   const ActiveIcon = activeFeature.icon;
-
-  const isDark = theme === "dark";
 
   const rootClass =
     "min-h-screen transition-colors duration-300 " +
@@ -107,12 +106,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
           </span>
         </div>
         <div className="flex items-center gap-3">
-          {/* Theme toggle */}
+          {/* Theme toggle (global) */}
           <button
             type="button"
-            onClick={() =>
-              setTheme((prev) => (prev === "dark" ? "light" : "dark"))
-            }
+            onClick={toggleTheme}
             className={`flex h-8 w-8 items-center justify-center rounded-full border text-xs transition-colors ${
               isDark
                 ? "border-slate-700 bg-slate-900 text-slate-100 hover:bg-slate-800"
