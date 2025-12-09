@@ -1,4 +1,4 @@
-import { Phone, Mail, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MessageCircle } from "lucide-react";
 
 interface Contact {
   id: string;
@@ -7,7 +7,7 @@ interface Contact {
   designation: string;
   tags: string[];
   lastContacted: string;
-  avatar: string;
+  avatar?: string;
 }
 
 interface ContactCardProps {
@@ -16,67 +16,81 @@ interface ContactCardProps {
 }
 
 export default function ContactCard({ contact, onClick }: ContactCardProps) {
-  return (
-    <div
-      onClick={onClick}
-      className="bg-card border border-border rounded-xl p-4 hover:shadow-lg hover:border-primary/50 transition-all cursor-pointer group"
-    >
-      <div className="flex items-center gap-4">
-        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-semibold shrink-0">
-          {contact.name.split(' ').map(n => n[0]).join('')}
-        </div>
-        
-        <div className="flex-1 min-w-0">
-          <h3 className="font-semibold truncate">{contact.name}</h3>
-          <p className="text-sm text-muted-foreground truncate">{contact.designation} at {contact.company}</p>
-          <div className="flex flex-wrap gap-1 mt-2">
-            {contact.tags.slice(0, 3).map((tag, index) => (
-              <span
-                key={index}
-                className="px-2 py-0.5 text-xs rounded-full bg-primary/10 text-primary"
-              >
-                {tag}
-              </span>
-            ))}
-            {contact.tags.length > 3 && (
-              <span className="px-2 py-0.5 text-xs rounded-full bg-secondary text-muted-foreground">
-                +{contact.tags.length - 3}
-              </span>
-            )}
-          </div>
-        </div>
+  const initials = contact.name
+    .split(" ")
+    .map((n) => n[0])
+    .join("");
 
-        <div className="hidden sm:flex items-center gap-2 shrink-0">
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            className="p-2 rounded-lg hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
-          >
-            <Phone className="w-4 h-4" />
-          </button>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            className="p-2 rounded-lg hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
-          >
-            <Mail className="w-4 h-4" />
-          </button>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            className="p-2 rounded-lg hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
-          >
-            <MessageCircle className="w-4 h-4" />
-          </button>
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="flex w-full flex-col gap-3 rounded-xl border border-slate-800 bg-slate-950/80 p-4 text-left hover:border-blue-500/60 hover:bg-slate-900/80 transition-colors"
+    >
+      <div className="flex items-center gap-3">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 text-xs font-semibold text-slate-100">
+          {initials}
+        </div>
+        <div className="flex flex-col">
+          <h3 className="text-sm font-semibold text-slate-100">
+            {contact.name}
+          </h3>
+          <p className="text-xs text-slate-400">
+            {contact.designation} at {contact.company}
+          </p>
         </div>
       </div>
-      
-      <div className="mt-2 text-xs text-muted-foreground">
-        Last contacted: {contact.lastContacted}
+
+      <div className="flex flex-wrap gap-1">
+        {contact.tags.slice(0, 3).map((tag) => (
+          <span
+            key={tag}
+            className="rounded-full bg-slate-900 px-2 py-0.5 text-[10px] font-medium text-slate-300"
+          >
+            {tag}
+          </span>
+        ))}
+        {contact.tags.length > 3 && (
+          <span className="rounded-full bg-slate-900 px-2 py-0.5 text-[10px] font-medium text-slate-400">
+            +{contact.tags.length - 3}
+          </span>
+        )}
       </div>
-    </div>
+
+      <div className="flex items-center justify-between text-xs text-slate-400">
+        <span>Last contacted: {contact.lastContacted}</span>
+        <div className="flex gap-1.5">
+          <IconButton
+            icon={<MessageCircle className="h-3.5 w-3.5" />}
+            label="Message"
+          />
+          <IconButton
+            icon={<Phone className="h-3.5 w-3.5" />}
+            label="Call"
+          />
+          <IconButton
+            icon={<Mail className="h-3.5 w-3.5" />}
+            label="Email"
+          />
+        </div>
+      </div>
+    </button>
+  );
+}
+
+interface IconButtonProps {
+  icon: React.ReactNode;
+  label: string;
+}
+
+function IconButton({ icon }: IconButtonProps) {
+  return (
+    <button
+      type="button"
+      onClick={(e) => e.stopPropagation()}
+      className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-900 text-slate-300 hover:bg-slate-800 hover:text-slate-100 transition-colors"
+    >
+      {icon}
+    </button>
   );
 }
