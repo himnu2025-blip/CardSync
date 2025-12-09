@@ -1,29 +1,49 @@
-import { Mail, Phone, Globe, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Phone, Globe, Linkedin, Twitter } from "lucide-react";
 
 export default function BusinessCardPreview() {
   return (
-    <div className="w-full max-w-md mx-auto">
-      <div className="bg-gradient-to-br from-primary to-accent rounded-2xl p-8 text-white shadow-2xl">
-        <div className="flex items-start justify-between mb-6">
-          <div className="flex-1">
-            <h2 className="text-2xl font-bold mb-1">Alex Johnson</h2>
-            <p className="text-white/90 text-sm mb-1">Senior Product Designer</p>
-            <p className="text-white/80 text-sm">Innovation Labs Inc.</p>
+    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 via-cyan-400 to-purple-500 p-[1px] shadow-2xl">
+      <div className="flex flex-col justify-between gap-4 rounded-2xl bg-slate-950/90 p-5 sm:p-6">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h3 className="text-lg font-semibold text-white">
+              Alex Johnson
+            </h3>
+            <p className="text-sm text-slate-300">
+              Senior Product Designer
+            </p>
+            <p className="mt-1 text-xs text-slate-400">
+              Innovation Labs Inc.
+            </p>
           </div>
-          <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-2xl font-bold">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-white">
             AJ
           </div>
         </div>
 
-        <div className="space-y-2">
-          <ContactInfo icon={<Phone className="w-4 h-4" />} text="+1 (555) 123-4567" />
-          <ContactInfo icon={<Mail className="w-4 h-4" />} text="alex@innovationlabs.com" />
-          <ContactInfo icon={<Globe className="w-4 h-4" />} text="www.alexjohnson.design" />
+        <div className="grid gap-3 text-xs text-slate-200">
+          <ContactInfo
+            icon={<Phone className="h-3.5 w-3.5" />}
+            text="+1 (555) 123-4567"
+          />
+          <ContactInfo
+            icon={<Mail className="h-3.5 w-3.5" />}
+            text="alex@innovationlabs.com"
+          />
+          <ContactInfo
+            icon={<Globe className="h-3.5 w-3.5" />}
+            text="alexjohnson.design"
+          />
         </div>
 
-        <div className="flex gap-3 mt-6 pt-6 border-t border-white/20">
-          <SocialIcon icon={<Linkedin className="w-4 h-4" />} />
-          <SocialIcon icon={<Twitter className="w-4 h-4" />} />
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex gap-2">
+            <SocialIcon icon={<Linkedin className="h-4 w-4" />} />
+            <SocialIcon icon={<Twitter className="h-4 w-4" />} />
+          </div>
+          <p className="text-xs text-slate-400">
+            124 views • 38 saves
+          </p>
         </div>
       </div>
     </div>
@@ -37,8 +57,10 @@ interface ContactInfoProps {
 
 function ContactInfo({ icon, text }: ContactInfoProps) {
   return (
-    <div className="flex items-center gap-2 text-sm text-white/90">
-      {icon}
+    <div className="flex items-center gap-2">
+      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-900/80 text-slate-200">
+        {icon}
+      </span>
       <span>{text}</span>
     </div>
   );
@@ -50,7 +72,7 @@ interface SocialIconProps {
 
 function SocialIcon({ icon }: SocialIconProps) {
   return (
-    <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors cursor-pointer">
+    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-900/80 text-slate-100">
       {icon}
     </div>
   );
