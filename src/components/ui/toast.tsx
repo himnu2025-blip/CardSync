@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { CheckCircle, XCircle, Info, X } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { CheckCircle, XCircle, Info, X } from "lucide-react";
 
 interface Toast {
   id: string;
   message: string;
-  type: 'success' | 'error' | 'info';
+  type: "success" | "error" | "info";
 }
 
 const listeners: Set<(toast: Toast) => void> = new Set();
@@ -15,7 +15,7 @@ export function addToastListener(listener: (toast: Toast) => void) {
 }
 
 export function notifyToastListeners(toast: Toast) {
-  listeners.forEach(listener => listener(toast));
+  listeners.forEach((listener) => listener(toast));
 }
 
 export function ToastContainer() {
@@ -23,37 +23,45 @@ export function ToastContainer() {
 
   useEffect(() => {
     const listener = (toast: Toast) => {
-      setToasts(prev => [...prev, toast]);
+      setToasts((prev) => [...prev, toast]);
       setTimeout(() => {
-        setToasts(prev => prev.filter(t => t.id !== toast.id));
+        setToasts((prev) => prev.filter((t) => t.id !== toast.id));
       }, 3000);
     };
 
     return addToastListener(listener);
   }, []);
 
+  const removeToast = (id: string) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  };
+
+  if (!toasts.length) return null;
+
   return (
-    <div className="fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-md">
-      {toasts.map(toast => (
+    <div className="fixed top-4 right-4 z-50 flex flex-col gap-2">
+      {toasts.map((toast) => (
         <div
           key={toast.id}
-          className={`flex items-center gap-3 p-4 rounded-lg shadow-lg border backdrop-blur-sm animate-in slide-in-from-right ${
-            toast.type === 'success'
-              ? 'bg-green-50 border-green-200 text-green-900 dark:bg-green-900/20 dark:border-green-800 dark:text-green-100'
-              : toast.type === 'error'
-              ? 'bg-red-50 border-red-200 text-red-900 dark:bg-red-900/20 dark:border-red-800 dark:text-red-100'
-              : 'bg-blue-50 border-blue-200 text-blue-900 dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-100'
-          }`}
+          className="flex min-w-[260px] max-w-sm items-start gap-3 rounded-lg border border-slate-800 bg-slate-900/90 px-4 py-3 text-sm text-slate-100 shadow-lg backdrop-blur"
         >
-          {toast.type === 'success' && <CheckCircle className="w-5 h-5" />}
-          {toast.type === 'error' && <XCircle className="w-5 h-5" />}
-          {toast.type === 'info' && <Info className="w-5 h-5" />}
-          <p className="flex-1 text-sm font-medium">{toast.message}</p>
+          <div className="mt-0.5">
+            {toast.type === "success" && (
+              <CheckCircle className="h-4 w-4 text-emerald-400" />
+            )}
+            {toast.type === "error" && (
+              <XCircle className="h-4 w-4 text-red-400" />
+            )}
+            {toast.type === "info" && (
+              <Info className="h-4 w-4 text-blue-400" />
+            )}
+          </div>
+          <div className="flex-1">{toast.message}</div>
           <button
-            onClick={() => setToasts(prev => prev.filter(t => t.id !== toast.id))}
-            className="hover:opacity-70 transition-opacity"
+            onClick={() => removeToast(toast.id)}
+            className="ml-1 rounded-full p-1 text-slate-400 hover:bg-slate-800 hover:text-slate-100 transition-colors"
           >
-            <X className="w-4 h-4" />
+            <X className="h-3 w-3" />
           </button>
         </div>
       ))}
